@@ -1,0 +1,61 @@
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the
+// README at: https://github.com/devcontainers/templates/tree/main/src/ubuntu
+
+{
+	"name": "Vitis AI Dev Container",
+	"image": "xilinx/vitis-ai-cpu:latest",
+	"waitFor": "initializeCommand",
+
+	"workspaceFolder": "/workspace",
+	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
+
+	"runArgs": [
+		"--network=host",
+		"--ipc=host",
+		// "--shm-size=2g",
+
+		"--env", "USER=${localEnv:USER}",
+		"--env", "UID=${localEnv:UID}",
+		"--env", "GID=${localEnv:GID}"
+
+		// "--volume", "/dev/shm:/dev/shm",
+		// "--volume", "/opt/xilinx/dsa:/opt/xilinx/dsa",
+		// "--volume", "/opt/xilinx/overlaybins:/opt/xilinx/overlaybins",
+
+		// "--volume", "${localWorkspaceFolder}:/workspace",
+		// "--volume", "${localWorkspaceFolder}:/vitis_ai_home",
+
+		// "--device=/dev/dri",
+		// "--device=/dev/kfd"
+	],
+
+	"remoteUser": "root",
+
+	"customizations": {
+		"vscode": {
+			"extensions": [
+				"ms-python.python"
+				// "ms-azuretools.vscode-docker"
+			]
+		}
+	},
+
+	"postCreateCommand": "echo 'Dev container ready'",
+
+	"overrideCommand": false
+
+	// Features to add to the dev container. More info: https://containers.dev/features.
+	// "features": {},
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	// "postCreateCommand": "uname -a",
+
+	// Configure tool-specific properties.
+	// "customizations": {},
+
+	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
+	// "remoteUser": "root"
+}
