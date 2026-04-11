@@ -46,8 +46,9 @@ else
     . $VAI_ROOT/conda/etc/profile.d/conda.sh \
     && mkdir -p $VAI_ROOT/conda/pkgs \
     && python3 -m pip install --upgrade pip wheel setuptools \
-    && conda config --env --remove-key channels || true  \
-    && conda config --env --append channels ${VAI_CONDA_CHANNEL} 
+    && conda config --env --remove-key channels \
+    && conda config --env --add channels ${VAI_CONDA_CHANNEL} \
+    && conda config --env --remove channels defaults
 
     mamba env create -v -f /scratch/${DOCKER_TYPE}_conda/vitis-ai-pytorch.yml \
         && conda activate vitis-ai-pytorch \
