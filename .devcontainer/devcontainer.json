@@ -3,15 +3,26 @@
 
 {
 	"name": "Vitis AI Dev Container",
-	"image": "xilinx/vitis-ai-cpu:latest",
-	"waitFor": "initializeCommand",
+	"build": {
+    	"dockerfile": "Dockerfile",
+		"options": ["--pull=false"]
+  	},
+	// "image": "xilinx/vitis-ai-pytorch-gpu:3.5.0.001-77cb9e6ad",
 
 	"workspaceFolder": "/workspace",
 	"workspaceMount": "source=${localWorkspaceFolder},target=/workspace,type=bind",
 
+	// "features": {
+	// 	"ghcr.io/devcontainers/features/common-utils:2" : {
+	// 		"userUid": 1000,
+	// 		"userGid": 1000
+	// 	}
+  	// },
+
 	"runArgs": [
 		"--network=host",
 		"--ipc=host",
+		"--gpus=all",
 		// "--shm-size=2g",
 
 		"--env", "USER=${localEnv:USER}",
@@ -29,7 +40,7 @@
 		// "--device=/dev/kfd"
 	],
 
-	"remoteUser": "root",
+	"remoteUser": "vitis-ai-user",
 
 	"customizations": {
 		"vscode": {
@@ -40,9 +51,9 @@
 		}
 	},
 
-	"postCreateCommand": "echo 'Dev container ready'",
+	"postCreateCommand": "echo 'Dev container ready'"
 
-	"overrideCommand": false
+	// "overrideCommand": false
 
 	// Features to add to the dev container. More info: https://containers.dev/features.
 	// "features": {},
